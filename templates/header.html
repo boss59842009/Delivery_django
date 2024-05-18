@@ -1,0 +1,38 @@
+<nav>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href='{% url "login" %}'>Головна</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href='{% url "clients-info" %}'>Список клієнтів</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href='{% url "create-client" %}'>Створити клієнта</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href='{% url "login" %}'>Вхід</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href='{% url "register" %}' tabindex="-1" aria-disabled="true">Реєстрація</a>
+                </li>
+                <li class="nav-item">
+                    <form class="d-flex" action='{% url "logout" %}' method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-success" type="submit">Logout</button>
+                    </form>
+                </li>
+                <li class="navbar-text ms-auto">
+                    {{ request.user }}
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <h1>DELIVERY APPLICATION</h1>
+    </form>
+    <hr>
+</nav>

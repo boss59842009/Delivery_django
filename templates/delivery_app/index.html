@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    {{ render_string }}
+    {% if request.user.is_authenticated %}
+        <h1>Hello, you are aunthentificated!</h1>
+    {% else %}
+        <h1>Hello, you are unaunthentificated!</h1>
+    {% endif %}
+    <a href="{% url 'clients-info' %}">Go to clients info</a>
+    <br>
+    <a href="{% url 'create-client' %}">Go to create client</a>
+    <br>
+    <a href="{% url 'register' %}">Go to create user</a>
+{% endblock %}
