@@ -6,9 +6,10 @@
     <title>Title</title>
 </head>
 <body>
-    {% include 'header.html' %}
+    {% if request.user.is_authenticated %}
+        {% include 'header.html' %}
+    {% endif %}
     {% block content %}
-
     {% endblock %}
 </body>
 </html>

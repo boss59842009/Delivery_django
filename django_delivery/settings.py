@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'delivery_app'
+    'delivery_app',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -123,7 +124,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = '/admin/login'
+LOGIN_URL = '/login'
 
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'logout'
+
+AUTH_USER_MODEL = 'accounts.CustomUser'

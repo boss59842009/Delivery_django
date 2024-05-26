@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    <h2>{{ view.title }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <h2>{{ form1.title }}</h2>
+        {{ form1.as_p }}
+        <h2>{{ form2.title }}</h2>
+        {{ form2.as_p }}
+        <h2>{{ form3.title }}</h2>
+        {{ form3.as_p }}
+        <button type="submit">Оформити доставку</button>
+    </form>
+</div>
+{% endblock %}
