@@ -1,0 +1,148 @@
+body{
+  width: 100%;
+  height:100vh;
+  margin:0;
+  background-color: #B3ACAC;
+  color:#000000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:1.2vw;
+}
+
+header{
+    width: 100%;
+    height: 5vh;
+    top:0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+button{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2vw;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin: 0.5em 1.5em;
+    padding: 0;
+}
+
+.dropdown-toggle {
+    background-color: #B3ACAC;
+    color: rgb(0, 0, 0);
+    border: none;
+    margin: 0 ;
+    padding: 0;
+    cursor: pointer;
+    min-width: 10vh;
+    min-height: 5vh;
+    text-decoration-line: underline;
+}
+
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.62);
+    min-width: 24vh;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-menu a {
+    color: rgb(0, 0, 0);
+    padding: 1vh 1vh;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu a:hover {
+    color: rgb(255, 255, 255);
+    background-color: #575757;
+}
+
+
+section{
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+img{
+    width: 6vh;
+    height: 6.5vh;
+    margin: 0;
+}
+
+.person{
+    margin-right: 1.5em;
+    
+}
+
+form{
+    width:50%;
+    margin: 2em auto;
+    padding: 0.5em;
+    background-color: rgba(255, 255, 255, 0.62);
+    border-radius: 1.5vh;
+}
+
+fieldset {
+    border: none;
+    margin:0.5em 2.5em;
+    padding:0.2em 0;
+}
+
+label {
+    display:block;
+    margin:0.5em 0;
+}
+
+.order_weight, .order_volume, .house, .apartment{
+    display:inline-block;
+    width:40%;
+    margin-right: 0.7em;
+}
+
+.big, select, textarea{
+    display:block;
+    width:100%;
+    margin:0.2em 0;
+}
+
+.my_form input{
+    font-size:1.2vw;
+}
+
+select, textarea{
+    font-size:1.2vw;
+}
+
+.plus{
+    margin: 0.7em 0;
+}
+
+input[type="submit"]{
+    display: block;
+    width: 50%;
+    margin: 0.6em auto;
+    height: 8vh;
+    font-size: 1.4em;
+    background-color:#B3ACAC;
+    color:rgb(0, 0, 0);
+    border-color: rgb(0, 0, 0);
+    border-radius: 1vh;
+  }
+
+input[type="submit"]:hover{
+    cursor: pointer;
+}
+
+h2{
+    text-decoration-line: underline;
+}

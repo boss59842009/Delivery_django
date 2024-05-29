@@ -28,7 +28,7 @@ class CreateDeliveryAddressForm(forms.ModelForm):
         }
 
 
-class CreateOrderInfoForm(forms.ModelForm):
+class CreateOrderForm(forms.ModelForm):
     title = 'Дані доставки'
 
     class Meta:
@@ -54,10 +54,18 @@ class CreateOrderInfoForm(forms.ModelForm):
             'additional_info': 'Додаткова інформація',
         }
 
-# class CreateOrderForm(forms.Form):
-#     pass
-#     # client_set = forms.formset_factory(ClientForm)
-#     # print(client_set)
+
+class CreateOrderDateTimeForm(forms.ModelForm):
+    title = 'Дата та час доставки'
+
+    class Meta:
+        model = OrderInfo
+        fields = ['ship_date', 'ship_time']
+        labels = {
+            'ship_date': 'Дата доставки',
+            'ship_time': 'Час доставки',
+            # 'driver': 'Підбір транспорту'
+        }
 
 
 

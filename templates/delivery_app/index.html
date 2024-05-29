@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-    {{ render_string }}
     {% if request.user.is_authenticated %}
         <h1>Hello, you are aunthentificated!</h1>
     {% else %}

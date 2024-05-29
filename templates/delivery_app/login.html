@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>LOGIN</h2>
-    <form method="post">
+<form method="post">
+    <fieldset>
+        <h2>LOGIN</h2>
         {% csrf_token %}
         {{ form.as_p }}
     <button type="submit">Login</button>
+    <a href='{% url "register" %}'>Реєстрація</a>
+    </fieldset>
 </form>
-<a class="nav-link active" href='{% url "register" %}' tabindex="-1" aria-disabled="true">Реєстрація</a>
 {% endblock %}

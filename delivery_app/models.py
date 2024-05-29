@@ -35,7 +35,7 @@ class Driver(models.Model):
     vehicle_code = models.IntegerField(unique=True)
     vehicle_name = models.CharField(max_length=50)
     vehicle_max_weight = models.IntegerField()
-    vehicle_max_volume = models.DecimalField(max_digits=5, decimal_places=2)
+    vehicle_max_volume = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
@@ -56,7 +56,7 @@ class OrderInfo(models.Model):
     driver = models.ForeignKey(Driver, on_delete=models.PROTECT, blank=True, null=True, related_name='driver')
     order_number = models.IntegerField(unique=True)
     order_weight = models.IntegerField()
-    order_volume = models.DecimalField(max_digits=5, decimal_places=2)
+    order_volume = models.DecimalField(max_digits=10, decimal_places=2)
     order_amount = models.DecimalField(max_digits=10, decimal_places=2)
     order_adress = models.CharField(max_length=50)
     unload_service = models.BooleanField(default=False)

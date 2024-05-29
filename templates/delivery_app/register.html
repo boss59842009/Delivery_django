@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Registration</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
+<fieldset>
+    <form method="post">
+        <h2>Registration</h2>
+        {% csrf_token %}
+        {{ form.as_p }}
         <button type="submit">Register</button>
     </form>
+</fieldset>
 {% endblock %}
