@@ -1,16 +1,72 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="post">
+<form class="my_form" method="post">
+    {% csrf_token %}
     <fieldset>
-        <h2>{{ view.title }}</h2>
-        {% csrf_token %}
         <h2>{{ form1.title }}</h2>
-        {{ form1.as_p }}
-        <h2>{{ form2.title }}</h2>
-        {{ form2.as_p }}
-        <h2>{{ form3.title }}</h2>
-        {{ form3.as_p }}
-        <button type="submit">Оформити доставку</button>
+        <label for="{{ form1.name.id_for_label }}">ПІБ/Назва компанії:
+            <input class="big" id="{{ form1.name.id_for_label }}" name="{{ form1.name.html_name }}"
+                   type="text" placeholder="Введіть ПІБ або назву компанії клієнта" required />
+        </label>
+        <label for="{{ form1.phone_number.id_for_label }}">Номер телефону:
+            <input class="big" id="{{ form1.phone_number.id_for_label }}" name="{{ form1.phone_number.html_name }}" type="tel" placeholder="Введіть номер телефону клієнта " required />
+        </label>
     </fieldset>
+    <fieldset>
+        <h2>Адреса доставки</h2>
+        <label for="{{ form2.city.id_for_label }}">Населений пункт:
+            <input class="big" id="{{ form2.city.id_for_label }}" name="{{ form2.city.html_name }}" type="text"
+                   placeholder="Введіть назву населеного пункту" required />
+        </label>
+        <label for="{{ form2.street.id_for_label }}">Вулиця:
+            <input class="big" id="{{ form2.street.id_for_label }}" name="{{ form2.street.html_name }}" type="text"
+                   placeholder="Введіть назву вулиці" required />
+        </label>
+        <label class="house" for="{{ form2.house.id_for_label }}">Будинок:
+            <input id="{{ form2.house.id_for_label }}" name="{{ form2.house.html_name }}" type="text"
+                   placeholder="Введіть номер будинку"
+                   required />
+        </label>
+        <label class="apartment" for="{{ form2.apartment.id_for_label }}">Квартира:
+            <input id="{{ form2.apartment.id_for_label }}" name="{{ form2.apartment.html_name }}" type="number" placeholder="Введіть номер квартири" />
+        </label>
+        </fieldset>
+    <fieldset>
+        <h2>Дані доставки</h2>
+        <label for="{{ form3.order_number.id_for_label }}">Номер замовлення:
+            <input class="big" id="{{ form3.order_number.id_for_label }}" name="{{ form3.order_number.html_name }}"
+                   type="number" placeholder="Введіть номер замовлення" required />
+        </label>
+        <label class="order_weight" for="{{ form3.order_weight.id_for_label }}">Вага замовлення:
+            <input id="{{ form3.order_weight.id_for_label }}" name="{{ form3.order_weight.html_name }}" type="number"
+                   placeholder="Введіть вагу замовлення" required />
+        </label>
+        <label class="order_volume" for="{{ form3.order_volume.id_for_label }}">Об'єм замовлення:
+            <input id="{{ form3.order_volume.id_for_label }}" name="{{ form3.order_volume.html_name }}" type="number"
+                   placeholder="Введіть об'єм замовлення" required />
+        </label>
+        <label for="{{ form3.order_amount.id_for_label }}">Сума замовлення:
+            <input id="{{ form3.order_amount.id_for_label }}" name="{{ form3.order_amount.html_name }}" type="number"
+                   placeholder="Введіть суму замовлення" required />
+        </label>
+        <label for="{{ form3.order_adress.id_for_label }}">Склад відвантаження:
+            {{ form3.order_adress }}
+        </label>
+        <label class="plus" >Додаткові послуги:</label>
+        <label>
+            <input id="{{ form3.unload_service.id_for_label }}" name="{{ form3.unload_service.html_name }}"
+                   type="checkbox" value="unloading"/>Розвантаження замовлення
+        </label>
+        <label>
+            <input id="{{ form3.manipulator_service.id_for_label }}" name="{{ form3.manipulator_service.html_name }}"
+                   type="checkbox" value="manipulator"/>Послуги маніпулятора
+        </label>
+        <label class="plus">Додаткова інформація:
+            <textarea id="{{ form3.additional_info.id_for_label }}"
+                      name="{{ form3.additional_info.html_name }}" rows="3" cols="30"
+                      placeholder="Коментар по доставці"></textarea>
+        </label>
+    </fieldset>
+    <input id="submit" type="submit" value="Оформити доставку"></input>
 </form>
 {% endblock %}

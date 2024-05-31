@@ -18,7 +18,7 @@ class Client(models.Model):
 class DeliveryAddress(models.Model):
     city = models.CharField(max_length=50)
     street = models.CharField(max_length=50)
-    house = models.CharField(max_length=20)
+    house = models.IntegerField()
     apartment = models.IntegerField(blank=True, null=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
 
@@ -50,6 +50,10 @@ class OrderInfo(models.Model):
         ('delivered', 'Доставлено'),
         ('canceled', 'Відмінено')
     ]
+    ADRESS_CHOICES = [
+        ('address1', "Склад №1"),
+        ('address2', "Склад №2")
+    ]
 
     client = models.ForeignKey(Client, on_delete=models.PROTECT, related_name='orders')
     manager = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='manager')
@@ -58,7 +62,8 @@ class OrderInfo(models.Model):
     order_weight = models.IntegerField()
     order_volume = models.DecimalField(max_digits=10, decimal_places=2)
     order_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    order_adress = models.CharField(max_length=50)
+    delivery_amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    order_adress = models.CharField(max_length=50, choices=ADRESS_CHOICES)
     unload_service = models.BooleanField(default=False)
     manipulator_service = models.BooleanField(default=False)
     additional_info = models.TextField(blank=True, null=True)

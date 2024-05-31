@@ -2,17 +2,17 @@
 {% block content %}
 <form method="post">
     <fieldset>
+        {% csrf_token %}
         <h2>{{ form.title }}</h2>
         <h2>Менеджер</h2>
         <p>{{ order_manager.first_name }} {{ order_manager.last_name }}</p>
         <p>{{ order_manager.phone_number }}</p>
         <h2>Дата та час доставки</h2>
-        {% csrf_token %}
         {{ datetime_form.as_p }}
         <h2>Підбір транспорту</h2>
         <p>{{ order_driver.vehicle_code }} | {{ order_driver.vehicle_name }}</p>
         <p>{{ order_driver.vehicle_max_volume }} | {{ order_driver.vehicle_max_weight }}</p>
-        <p>ВАРТІСТЬ ДОСТАВКИ: 4500 грн</p>
+        <p>ВАРТІСТЬ ДОСТАВКИ: {{ delivery_amount }} грн</p>
         <button type="submit">Підтвердити доставку</button>
     </fieldset>
 </form>

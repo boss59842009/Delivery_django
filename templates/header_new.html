@@ -12,7 +12,7 @@
     <section>
         <p>{{ request.user }}</p>
         <img class="person" src="{% static 'img/person.png' %}">
-        <form action='{% url "logout" %}' method="post">
+        <form id="logout" action='{% url "logout" %}' method="post">
             {% csrf_token %}
             <button type="submit">Logout</button>
         </form>

@@ -25,6 +25,5 @@ class RegisterView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
-        print(user)
         login(self.request, user)
         return redirect(reverse_lazy('login'))

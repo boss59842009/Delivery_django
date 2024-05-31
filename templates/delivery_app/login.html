@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="post">
+<form class="my_form" method="post">
     <fieldset>
         <h2>LOGIN</h2>
         {% csrf_token %}
         {{ form.as_p }}
-    <button type="submit">Login</button>
-    <a href='{% url "register" %}'>Реєстрація</a>
+        <button type="submit">Вхід</button>
     </fieldset>
 </form>
+<button onclick='window.location.href="{% url "register" %}"'>Реєстрація</button>
 {% endblock %}
