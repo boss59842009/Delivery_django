@@ -20,7 +20,7 @@ class DeliveryAddress(models.Model):
     street = models.CharField(max_length=50)
     house = models.IntegerField()
     apartment = models.IntegerField(blank=True, null=True)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='addresses')
 
     class Meta:
         verbose_name_plural = 'Delivery addresses'

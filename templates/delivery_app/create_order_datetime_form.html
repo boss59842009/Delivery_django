@@ -1,19 +1,71 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="post">
+<form class="my_form" method="post">
+    {% csrf_token %}
     <fieldset>
-        {% csrf_token %}
-        <h2>{{ form.title }}</h2>
-        <h2>Менеджер</h2>
-        <p>{{ order_manager.first_name }} {{ order_manager.last_name }}</p>
-        <p>{{ order_manager.phone_number }}</p>
-        <h2>Дата та час доставки</h2>
-        {{ datetime_form.as_p }}
-        <h2>Підбір транспорту</h2>
-        <p>{{ order_driver.vehicle_code }} | {{ order_driver.vehicle_name }}</p>
-        <p>{{ order_driver.vehicle_max_volume }} | {{ order_driver.vehicle_max_weight }}</p>
-        <p>ВАРТІСТЬ ДОСТАВКИ: {{ delivery_amount }} грн</p>
-        <button type="submit">Підтвердити доставку</button>
+        <h2>Менеджер оформлюваної доставки</h2>
+        <label>ПІБ:
+            <input class="big" type="text" value="{{ order_manager.first_name }} {{ order_manager.last_name }}" disabled />
+        </label>
+        <label>Номер телефону:
+            <input class="big" type="tel" value="{{ order_manager.phone_number }}" disabled />
+        </label>
     </fieldset>
+    <fieldset>
+        <h2>Дата та час доставки</h2>
+        <label for="{{ datetime_form.ship_date.id_for_label }}">Дата доставки:
+            <input  id="{{ datetime_form.ship_date.id_for_label }}" name="{{ datetime_form.ship_date.html_name }}"
+                    type="date" placeholder="Оберіть дату" required />
+        </label>
+        <label for="{{ datetime_form.ship_time.id_for_label }}">Час доставки:
+            <input  id="{{ datetime_form.ship_time.id_for_label }}" name="{{ datetime_form.ship_time.html_name }}"
+                    type="time" placeholder="Оберіть час" required />
+        </label>
+    </fieldset>
+    <fieldset class>
+        <h2>Підбір транспорту</h2>
+        <div class="big">
+            <section class="section_text">
+                <p>Код транспортного засобу</p>
+                <p class="role">{{ order_driver.vehicle_code }}</p>
+            </section>
+            <section class="section_text">
+                <p>Назва транспортного засобу</p>
+                <p class="role">{{ order_driver.vehicle_name }}</p>
+            </section>
+            <section class="section_text">
+                <p>Макс. дозволений об'єм (м/кб)</p>
+                <p class="role">{{ order_driver.vehicle_max_volume }}</p>
+            </section>
+            <section class="section_text">
+                <p>Макс. дозволена вага (т)</p>
+                <p class="role">{{ order_driver.vehicle_max_weight }}</p>
+            </section>
+        </div>
+    </fieldset>
+    <section>
+        <h2 class="uppercase">Вартість доставки:</h2>
+        <section>
+            <h2 class="small">{{ delivery_amount }}</h2>
+            <h2 class="small"> грн</h2>
+        </section>
+    </section>
+    <input id="submit" type="submit" value="Підтвердити доставку"/>
 </form>
 {% endblock %}
+<!--<form method="post">-->
+<!--    <fieldset>-->
+<!--        {% csrf_token %}-->
+<!--        <h2>{{ form.title }}</h2>-->
+<!--        <h2>Менеджер</h2>-->
+<!--        <p>{{ order_manager.first_name }} {{ order_manager.last_name }}</p>-->
+<!--        <p>{{ order_manager.phone_number }}</p>-->
+<!--        <h2>Дата та час доставки</h2>-->
+<!--        {{ datetime_form.as_p }}-->
+<!--        <h2>Підбір транспорту</h2>-->
+<!--        <p>{{ order_driver.vehicle_code }} | {{ order_driver.vehicle_name }}</p>-->
+<!--        <p>{{ order_driver.vehicle_max_volume }} | {{ order_driver.vehicle_max_weight }}</p>-->
+<!--        <p>ВАРТІСТЬ ДОСТАВКИ: {{ delivery_amount }} грн</p>-->
+<!--        <button type="submit">Підтвердити доставку</button>-->
+<!--    </fieldset>-->
+<!--</form>-->

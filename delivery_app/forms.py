@@ -64,7 +64,6 @@ class CreateOrderDateTimeForm(forms.ModelForm):
         labels = {
             'ship_date': 'Дата доставки',
             'ship_time': 'Час доставки',
-            # 'driver': 'Підбір транспорту'
         }
 
 

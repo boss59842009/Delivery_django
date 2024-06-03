@@ -10,7 +10,7 @@
         </div>
     </div>
     <section>
-        <p>{{ request.user }}</p>
+        <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
         <img class="person" src="{% static 'img/person.png' %}">
         <form id="logout" action='{% url "logout" %}' method="post">
             {% csrf_token %}

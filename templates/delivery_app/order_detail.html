@@ -1,4 +1,180 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p>{{ object }}</p>
+<form  method="post">
+    <div class="center">
+    <h2 class="uppercase">Доставка</h2>
+    <section class="marg">
+        <p class="about_text">Дата:</p>
+        <section class="some">
+            <p class="small">{{ order.ship_date|date:"d.m.Y" }}</p>
+        </section>
+        <p class="about_text">Час:</p>
+        <section>
+            <p class="small">{{ order.ship_time|time:"H:i"}}</p>
+        </section>
+    </section>
+    </div>
+    <fieldset >
+        <h2>Менеджер</h2>
+        <section >
+            <p class="about_text">ПІБ:</p>
+            <section>
+                <p class="small">{{ order.manager.first_name }} {{ order.manager.last_name }}</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Номер телефону:</p>
+            <section>
+                <p class="small">+{{ order.manager.phone_number }}</p>
+            </section>
+        </section>
+    </fieldset>
+    <fieldset >
+        <h2>Водій</h2>
+        <section >
+            <p class="about_text">ПІБ:</p>
+            <section>
+                <p class="small">{{ order.driver.name }}</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Номер телефону:</p>
+            <section>
+                <p class="small">+{{ order.driver.phone_number }}</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Код транспортного засобу:</p>
+            <section>
+                <p class="small">{{ order.driver.vehicle_code }}</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Назва транспортного засобу:</p>
+            <section>
+                <p class="small">{{ order.driver.vehicle_name }}</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Maкс. допустима вага вантажу:</p>
+            <section>
+                <p class="small">{{ order.driver.vehicle_max_weight }}</p>
+                <p class="small">кг</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Maкс. допустимий об’єм вантажу:</p>
+            <section>
+                <p class="small">{{ order.driver.vehicle_max_volume }}</p>
+                <p class="small">м/куб</p>
+            </section>
+        </section>
+    </fieldset>
+    <fieldset >
+        <h2>Клієнт</h2>
+        <section >
+            <p class="about_text">ПІБ / Назва компанії:</p>
+            <section>
+                <p class="small">{{ order.client.name }}</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Номер телефону:</p>
+            <section>
+                <p class="small">+{{ order.client.phone_number }}</p>
+            </section>
+        </section>
+    </fieldset>
+    <fieldset >
+        <h2>Адреса доставки</h2>
+        <section >
+            <p class="about_text">Населений пункт:</p>
+            <section>
+                <p class="small">Біла Церква</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Вулиця:</p>
+            <section>
+                <p class="small">Ярослава Мудрого</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Будинок:</p>
+            <section>
+                <p class="small">100А</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Квартира:</p>
+            <section>
+                <p class="small">15</p>
+            </section>
+        </section>
+    </fieldset>
+    <fieldset>
+        <h2>Дані доставки</h2>
+        <section >
+            <p class="about_text">Номер замовлення:</p>
+            <section>
+                <p class="small">{{ order.order_number }}</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Вага замовлення:</p>
+            <section>
+                <p class="small">{{ order.order_weight }}</p>
+                <p class="small">кг</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Об'єм замвлення:</p>
+            <section>
+                <p class="small">{{ order.order_volume }}</p>
+                <p class="small">м/куб</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Сума замовлення:</p>
+            <section>
+                <p class="small">{{ order.order_amount }}</p>
+                <p class="small">грн</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Вартість доставки:</p>
+            <section>
+                <p class="small">{{ order.delivery_amount }}</p>
+                <p class="small">грн</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Склад відвантаження:</p>
+            <section>
+                <p class="small">{{ order.get_order_adress_display }}</p>
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Додаткові послуги:</p>
+            <section>
+                {% if order.unload_service %}
+                <p class="small">Розвантаження замовлення</p>
+                {% endif %}
+                {% if order.manipulator_service %}
+                <p class="small">Послуги маніпулятора</p>
+                {% endif %}
+            </section>
+        </section>
+        <section >
+            <p class="about_text">Додаткова інформація:</p>
+            <section>
+                {% if order.additional_info %}
+                <p class="small">{{ order.additional_info }}</p>
+                {% endif %}
+            </section>
+        </section>
+    </fieldset>
+    </section>
+    <input id="submit" type="submit" value="Підтвердити"/>
+</form>
 {% endblock %}

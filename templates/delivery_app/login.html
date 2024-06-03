@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<form class="my_form" method="post">
-    <fieldset>
-        <h2>LOGIN</h2>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Вхід</button>
+<form id="login" method="post">
+    {% csrf_token %}
+    <h2 class="uppercase">Вхід</h2>
+    <fieldset class = "login">
+        <input class="big" id="log" name="{{ form.username.html_name }}" type="text" placeholder="Логін:" autofocus autocomplete="username"
+               required />
+        <input class="big" id="pas" name="{{ form.password.html_name }}" type="password" placeholder="Пароль:"
+               autocomplete="current-password"
+               required />
     </fieldset>
+    <input id="submit" type="submit" value="Вхід"/>
 </form>
 <button onclick='window.location.href="{% url "register" %}"'>Реєстрація</button>
 {% endblock %}
