@@ -52,6 +52,10 @@
         <label for="{{ form3.order_adress.id_for_label }}">Склад відвантаження:
             {{ form3.order_adress }}
         </label>
+        <label class="order_km" for="{{ form3.distance.id_for_label }}">Кілометраж:
+            <input id="{{ form3.distance.id_for_label }}" name="{{ form3.distance.html_name }}" type="number"
+                   placeholder="Введіть кілометраж" required />
+        </label>
         <label class="plus" >Додаткові послуги:</label>
         <label>
             <input id="{{ form3.unload_service.id_for_label }}" name="{{ form3.unload_service.html_name }}"

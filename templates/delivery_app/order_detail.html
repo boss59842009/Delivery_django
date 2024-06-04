@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-<form  method="post">
+<form method="get">
+    {% csrf_token %}
     <div class="center">
     <h2 class="uppercase">Доставка</h2>
     <section class="marg">
@@ -90,25 +91,25 @@
         <section >
             <p class="about_text">Населений пункт:</p>
             <section>
-                <p class="small">Біла Церква</p>
+                <p class="small">{{ order.address.city }}</p>
             </section>
         </section>
         <section >
             <p class="about_text">Вулиця:</p>
             <section>
-                <p class="small">Ярослава Мудрого</p>
+                <p class="small">{{ order.address.street }}</p>
             </section>
         </section>
         <section >
             <p class="about_text">Будинок:</p>
             <section>
-                <p class="small">100А</p>
+                <p class="small">{{ order.address.house }}</p>
             </section>
         </section>
         <section >
             <p class="about_text">Квартира:</p>
             <section>
-                <p class="small">15</p>
+                <p class="small">{{ order.address.appartment }}</p>
             </section>
         </section>
     </fieldset>
@@ -168,13 +169,10 @@
         <section >
             <p class="about_text">Додаткова інформація:</p>
             <section>
-                {% if order.additional_info %}
                 <p class="small">{{ order.additional_info }}</p>
-                {% endif %}
             </section>
         </section>
     </fieldset>
-    </section>
-    <input id="submit" type="submit" value="Підтвердити"/>
+    <input onclick='window.location.href="{% url "index" %}"' id="submit" type="submit" value="Підтвердити"/>
 </form>
 {% endblock %}

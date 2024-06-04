@@ -39,6 +39,7 @@ class CreateOrderForm(forms.ModelForm):
             'order_volume',
             'order_amount',
             'order_adress',
+            'distance',
             'unload_service',
             'manipulator_service',
             'additional_info'
@@ -49,6 +50,7 @@ class CreateOrderForm(forms.ModelForm):
             'order_volume': "Обʼєм замовлення",
             'order_amount': 'Сума замовлення',
             'order_adress': "Склад відвантаження",
+            'distance': 'Кілометраж',
             'unload_service': 'Розвантаження замовлення',
             'manipulator_service': 'Послуги маніпулятора',
             'additional_info': 'Додаткова інформація',
@@ -66,6 +68,10 @@ class CreateOrderDateTimeForm(forms.ModelForm):
             'ship_time': 'Час доставки',
         }
 
+
+class OrderFilterForm(forms.Form):
+    client = forms.CharField(max_length=100, required=False, label='Клієнт')
+    order = forms.IntegerField(required=False, label='Номер замовлення')
 
 
 

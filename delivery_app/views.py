@@ -41,8 +41,6 @@ class CreateClientView(LoginRequiredMixin, CreateView):
             if client:
                 form = forms.CreateClientForm(instance=client)
                 return render(self.request, self.template_name, {'form': form})
-
-
     # def post(self, request, *args, **kwargs):
     #     form = self.get_form()
     #     if form.is_valid():
@@ -109,7 +107,6 @@ class CreateOrderView(LoginRequiredMixin, CreateView):
             address = address_form.save(commit=False)
             address.client = client
             client.save()
-            address.save()
         else:
             # address_form.add_error('Щось пішло не так!')
             return render(request, self.template_name, {'form2': address_form})
@@ -118,6 +115,8 @@ class CreateOrderView(LoginRequiredMixin, CreateView):
             order.client = client
             order.manager = request.user
             order.updated_at = datetime.now()
+            order.address = address
+            address.save()
             order.save()
         else:
             order_form.add_error(None, 'Щось пішло не так!')
@@ -135,7 +134,7 @@ class CreateOrderDateTimeView(LoginRequiredMixin, CreateView):
         order = models.OrderInfo.objects.get(id=order_id)
         order_manager = order.manager
         order_driver = self.get_driver(order)
-        order.delivery_amount = self.get_price(order)
+        order.delivery_amount = self.get_delivery_price(order)
         order.save()
         self.request.session['order_driver_id'] = order_driver.id
         datetime_form = forms.CreateOrderDateTimeForm()
@@ -180,15 +179,22 @@ class CreateOrderDateTimeView(LoginRequiredMixin, CreateView):
             driver = models.Driver.objects.get(id=1)
             return driver
 
-    def get_price(self, order):
-        if order.order_weight < 1500:
-            return order.order_weight
-        if 1500 <= order.order_weight < 3000:
-            return order.order_weight * 0.8
-        if 3000 <= order.order_weight < 4500:
-            return order.order_weight * 0.7
-        if order.order_weight >= 4500:
-            return order.order_weight * 0.6
+    def get_delivery_price(self, order):
+        price = 0
+        if order.order_weight < 2000:
+            price = order.distance * 30
+        if 2000 <= order.order_weight < 3000:
+            price = order.distance * 40
+        if order.order_weight >= 3000:
+            price = order.distance * 50
+        if order.unload_service and order.manipulator_service:
+            price *= 2.5
+        elif order.unload_service:
+            price *= 2
+        elif order.manipulator_service:
+            price *= 1.5
+
+        return price
 
 
 class OrderDetailView(LoginRequiredMixin, DetailView):
@@ -203,12 +209,28 @@ class OrderDetailView(LoginRequiredMixin, DetailView):
             del self.request.session['order_id']
         if 'driver_id' in self.request.session:
             del self.request.session['driver_id']
-        order = self.get_object()
-        context['adress'] = order.client.addresses.all()
         return context
 
-    def post(self):
-        return redirect('index')
+
+class AllDeliveriesView(LoginRequiredMixin, ListView):
+    template_name = 'delivery_app/all_deliveries.html'
+    model = models.OrderInfo
+    context_object_name = 'orders'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = forms.OrderFilterForm(self.request.GET)
+        return context
+
+    def get_queryset(self):
+        query_set = super().get_queryset()
+        client = self.request.GET.get('client', '')
+        order_number = self.request.GET.get('order', '')
+        if order_number:
+            query_set = query_set.filter(order_number=order_number)
+        if client:
+            query_set = query_set.filter(client__name=client)
+        return query_set
 
 
 

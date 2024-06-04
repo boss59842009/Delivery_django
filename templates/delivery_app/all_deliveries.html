@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-<form class="all_deliver" method="post">
+<!--<form class="all_deliver" method="post">-->
+
+    <form method="GET">
+        {% csrf_token %}
+        {{ form.client.label_tag }}
+        {{ form.client }}
+        {{ form.order.label_tag }}
+        {{ form.order }}
+        <input id="submit" type="submit" value="Фільтрувати"></input>
+    </form>
     <table>
         <thead>
             <tr>
@@ -15,17 +24,19 @@
             </tr>
         </thead>
         <tbody>
+            {% for order in orders %}
             <tr>
-                <td>Дані</td>
-                <td>Дані</td>
-                <td>Дані</td>
-                <td>Дані</td>
-                <td>Дані</td>
-                <td>Дані</td>
-                <td>Дані</td>
-                <td>Дані</td>
+                <td>{{ order.ship_date|date:"d.m.Y" }}</td>
+                <td>{{ order.order_number }}</td>
+                <td>{{ order.driver.name }}</td>
+                <td>{{ order.driver.vehicle_code }}</td>
+                <td>{{ order.manager.first_name }}</td>
+                <td>{{ order.client.name }}</td>
+                <td>{{ order.delivery_amount }}</td>
+                <td>{{ order.get_status_display }}</td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
-</form>
+<!--</form>-->
 {% endblock %}
