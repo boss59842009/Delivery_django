@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="get">
-    {% csrf_token %}
+<div class="detail">
     <div class="center">
     <h2 class="uppercase">Доставка</h2>
     <section class="marg">
@@ -174,5 +173,5 @@
         </section>
     </fieldset>
     <input onclick='window.location.href="{% url "index" %}"' id="submit" type="submit" value="Підтвердити"/>
-</form>
+</div>
 {% endblock %}

@@ -2,14 +2,15 @@
 {% block content %}
 <!--<form class="all_deliver" method="post">-->
 
-    <form method="GET">
-        {% csrf_token %}
-        {{ form.client.label_tag }}
-        {{ form.client }}
-        {{ form.order.label_tag }}
-        {{ form.order }}
-        <input id="submit" type="submit" value="Фільтрувати"></input>
-    </form>
+<form method="GET">
+    {% csrf_token %}
+    {{ form.client.label_tag }}
+    {{ form.client }}
+    {{ form.order.label_tag }}
+    {{ form.order }}
+    <input id="submit" type="submit" value="Фільтрувати"></input>
+</form>
+<div class="all_deliver">
     <table>
         <thead>
             <tr>
@@ -27,7 +28,7 @@
             {% for order in orders %}
             <tr>
                 <td>{{ order.ship_date|date:"d.m.Y" }}</td>
-                <td>{{ order.order_number }}</td>
+                <td><a href="{% url 'order-info' order.pk %}">{{ order.order_number }}</a></td>
                 <td>{{ order.driver.name }}</td>
                 <td>{{ order.driver.vehicle_code }}</td>
                 <td>{{ order.manager.first_name }}</td>
@@ -38,5 +39,6 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
 <!--</form>-->
 {% endblock %}

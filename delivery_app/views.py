@@ -41,25 +41,6 @@ class CreateClientView(LoginRequiredMixin, CreateView):
             if client:
                 form = forms.CreateClientForm(instance=client)
                 return render(self.request, self.template_name, {'form': form})
-    # def post(self, request, *args, **kwargs):
-    #     form = self.get_form()
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect(self.success_url)
-
-        # else:
-        #     client_name = request.POST.get('name')
-        #     phone_number = request.POST.get('phone_number')
-        #     try:
-        #         client = models.Client.objects.get(name=client_name)
-        #         if client:
-        #             form = forms.CreateClientForm(instance=client)
-        #             return render(request, self.template_name, {'form': form})
-        #     except ObjectDoesNotExist:
-        #         client = models.Client.objects.get(phone_number=phone_number)
-        #         if client:
-        #             form = forms.CreateClientForm(instance=client)
-        #             return render(request, self.template_name, {'form': form})
 
 
 class ClientsInfoView(LoginRequiredMixin, ListView):
@@ -100,7 +81,6 @@ class CreateOrderView(LoginRequiredMixin, CreateView):
             try:
                 client = models.Client.objects.get(name=client_name)  # витягти клієнта з бази
             except (IntegrityError, ObjectDoesNotExist) as e:
-                print(e)
                 client_form.add_error('name', e)
                 return render(request, self.template_name, {'form1': client_form})
         if address_form.is_valid():
@@ -230,7 +210,7 @@ class AllDeliveriesView(LoginRequiredMixin, ListView):
             query_set = query_set.filter(order_number=order_number)
         if client:
             query_set = query_set.filter(client__name=client)
-        return query_set
+        return query_set.order_by('ship_date')
 
 
 
